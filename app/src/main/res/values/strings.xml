@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Phone Specification</string>
+    <string name="username">email@domain.com</string>
+    <string name="password">Password</string>
+    <string name="proceed">Proceed</string>
+    <string name="sign_in">Login</string>
+    <string name="sign_up">Register</string>
+    <string name="cancel">Cancel</string>
+    <string name="let_s_create_account">Let\'s Create Account</string>
+    <string name="let_s_get_started">Let\'s get Started</string>
+    <string name="phone_brand">Phone Brand</string>
+    <string name="phone_model">Phone Model</string>
+    <string name="phone_desc">Phone Description</string>
+    <string name="content_description">"Cards also support a swipe-to-dismiss behavior through the use of "</string>
+    <string name="password_2">Verify Password</string>
+    <string name="have_account">Already have account?</string>
+    <string name="pass_criteria">Your password should have a minimum of 8 characters and contain at least one number, one uppercase, and one lowercase letter. You can use special characters.</string>
+    <string name="loading">Loading phones data ...</string>
+    <string name="released_date">Released Date</string>
+    <string name="phone_dimension">Phone Dimension</string>
+    <string name="phone_os">Phone OS</string>
+    <string name="phone_storage">Phone Storage</string>
+    <string name="new_user">New User?</string>
+    <string name="register_now">Register Now</string>
+    <string name="username_or_password_not_correct">The username or password is incorrect</string>
+    <string name="input_incorrect">Required input is incorrect!</string>
+</resources>

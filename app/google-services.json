@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "475310125023",
+    "project_id": "phone-specification",
+    "storage_bucket": "phone-specification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475310125023:android:4876333071e7684b6b1e6a",
+        "android_client_info": {
+          "package_name": "com.project.phonespecification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475310125023-uomq14le1tk43eal4al33vngolv0gljg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQH7UG4DanqcZkLObRIQ57BPYKOtHwkRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475310125023-uomq14le1tk43eal4al33vngolv0gljg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
