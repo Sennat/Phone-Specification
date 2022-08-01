@@ -98,8 +98,11 @@ class LoginFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser != null) {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+        if (auth.currentUser == null) {
+            findNavController().navigate(PhoneCardFragmentDirections.actionPhoneCardFragmentToLoginFragment())
+        } else {
+            mainViewModelFragment.setLoading()
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToPhoneCardFragment())
         }
     }
 

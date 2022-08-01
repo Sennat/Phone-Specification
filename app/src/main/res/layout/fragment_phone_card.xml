@@ -17,7 +17,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:spanCount="3"/>
+        app:spanCount="2"/>
 
     <ProgressBar
         android:id="@+id/pb_loading"

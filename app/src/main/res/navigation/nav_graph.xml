@@ -44,6 +44,9 @@
             app:destination="@id/phoneListItemFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@animator/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_phoneCardFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/phoneListItemFragment"
