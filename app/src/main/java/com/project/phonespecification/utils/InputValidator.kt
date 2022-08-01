@@ -12,13 +12,9 @@ class InputValidator {
      * @return
      */
     private fun isValidInput(input: String, regex: String): Boolean {
-        return if (input.isNotBlank()) {
-            val pattern: Pattern = Pattern.compile(regex)
-            val matcher: Matcher = pattern.matcher(input)
-            matcher.matches()
-        } else {
-            false
-        }
+        val pattern: Pattern = Pattern.compile(regex)
+        val matcher: Matcher = pattern.matcher(input)
+        return matcher.matches()
     }
 
     /**
@@ -26,7 +22,7 @@ class InputValidator {
      */
     fun isEmailValidated(email: String): Boolean {
         // Regex to check valid email.
-        val emailRegex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{3,6}$"
+        val emailRegex ="^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{3,6}$"
         return isValidInput(email, emailRegex)
     }
 

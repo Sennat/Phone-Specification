@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/light_gray"
         android:padding="16dp">
 
     <TextView
@@ -27,7 +28,8 @@
         android:text="@string/phone_brand"
         android:textColor="@color/fb"
         android:textAlignment="center"
-        android:textAppearance="?attr/textAppearanceHeadline2" />
+        android:textFontWeight="400"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/txt_model"
@@ -36,7 +38,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/phone_model"
         android:textAlignment="center"
-        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:textSize="20sp"
         android:textColor="@color/blue_black_dark"/>
 
 </LinearLayout>

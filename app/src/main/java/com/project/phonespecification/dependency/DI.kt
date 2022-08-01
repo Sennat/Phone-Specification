@@ -21,6 +21,7 @@ object DI {
     private val service = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .client(provideHttpClient())
         .build()
         .create(RetrofitService::class.java)
 

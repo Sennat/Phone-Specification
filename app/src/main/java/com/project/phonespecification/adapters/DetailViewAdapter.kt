@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.project.phonespecification.databinding.PhoneCardDetailItemsBinding
-import com.project.phonespecification.models.PhoneData
+import com.project.phonespecification.models.PhoneDetails
 
-class DetailViewAdapter(private val phoneDataListItem: List<PhoneData>) : RecyclerView.Adapter<DetailViewAdapter.DetailViewHolder>() {
+class DetailViewAdapter(private val phoneDataListItem: List<PhoneDetails>) : RecyclerView.Adapter<DetailViewAdapter.DetailViewHolder>() {
 
     inner class DetailViewHolder(private val binding: PhoneCardDetailItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(item: PhoneData) {
+        fun onBind(item: PhoneDetails) {
             binding.apply {
                 txtBrand.text = item.brand
                 txtModel.text = item.phone_name

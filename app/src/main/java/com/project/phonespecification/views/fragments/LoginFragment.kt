@@ -1,12 +1,14 @@
 package com.project.phonespecification.views.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isNotEmpty
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.project.phonespecification.R
+import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.project.phonespecification.databinding.FragmentLoginBinding
 import com.project.phonespecification.utils.InputValidator
 
@@ -22,15 +24,12 @@ class LoginFragment : BaseFragment() {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(layoutInflater)
 
-        val user = binding.inputUsername.toString()
-        val pass = binding.inputPassword.toString()
-
-
+        // Validate user authentication
         binding.btnLogin.setOnClickListener {
-            // Validate user authentication
-            if (isUserInputValidated(user, pass)) {
-                authenticateUser(user, pass)
-            }
+            loginToApp(
+                binding.inputUsernameText.text.toString(),
+                binding.inputPasswordText.text.toString()
+            )
         }
 
         binding.btnRegister.setOnClickListener {
@@ -41,15 +40,31 @@ class LoginFragment : BaseFragment() {
     }
 
     /**
+     *  Login to app
+     */
+    private fun loginToApp(user: String, pass: String) {
+        binding.txtError.visibility = View.GONE
+        if (isInputValidated(binding.inputUsername, binding.inputPassword)) {
+            if (isUserEmailAndPasswordValidated(user, pass)) {
+                authenticateUser(user, pass)
+            }
+        } else {
+            binding.txtError.text.apply { "Authentication failed!" }
+            binding.txtError.visibility = View.VISIBLE
+        }
+    }
+
+    /**
      * Authenticate a user
      */
     private fun authenticateUser(username: String, password: String) {
-        authInstance.signInWithEmailAndPassword(username,password)
-            .addOnCompleteListener { task ->
-                if (task.isComplete) {
+        auth.signInWithEmailAndPassword(username, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    mainViewModelFragment.setLoading()
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToPhoneCardFragment())
                 } else {
-                    binding.txtError.text.apply { "Authentication failed!" }
+                    binding.txtError.text = "Authentication failed!}"
                     binding.txtError.visibility = View.VISIBLE
                 }
             }
@@ -58,17 +73,33 @@ class LoginFragment : BaseFragment() {
     /**
      * Validate user authentication
      */
-    private fun isUserInputValidated(user: String, pass: String): Boolean {
-       val inputValidator = InputValidator()
-
-        return if (inputValidator.isEmailValidated(user) && inputValidator.isPasswordValidated(pass)) {
+    private fun isUserEmailAndPasswordValidated(user: String, pass: String): Boolean {
+        return if (InputValidator().isEmailValidated(user) && InputValidator().isPasswordValidated(pass)
+        ) { ///later need email patter validation
             binding.txtError.visibility = View.GONE
             true
         } else {
-            binding.inputUsername.setBoxBackgroundColorResource(R.color.google)
-            binding.inputPassword.setBoxBackgroundColorResource(R.color.google)
             binding.txtError.visibility = View.VISIBLE
             false
+        }
+    }
+
+    private fun isInputValidated(
+        inputUsername: TextInputLayout,
+        inputPassword: TextInputLayout
+    ): Boolean {
+        return if (inputUsername.toString().isNotBlank() && inputPassword.toString().isNotBlank()) {
+            true
+        } else {
+            binding.txtError.text.apply { "Input can't be empty" }
+            false
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (auth.currentUser != null) {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
     }
 

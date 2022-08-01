@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.project.phonespecification.R
 import com.project.phonespecification.databinding.FragmentRegisterBinding
 import com.project.phonespecification.utils.InputValidator
@@ -22,17 +23,12 @@ class RegisterFragment : BaseFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(layoutInflater)
-        val username = binding.inputUsername.toString()
-        val password1 = binding.inputPassword1.toString()
-        val password2 = binding.inputPassword1.toString()
 
         // Return back to login fragment
         binding.btnRegister.setOnClickListener {
-            if (password1 == password2) {
-                registerUser(username, password1)
-            } else {
-                binding.txtError.text = "Passwords aren't match!"
-                binding.txtError.visibility = View.VISIBLE
+            if (isPasswordsMatch(binding.inputPass1.text.toString(), binding.inputPass2.text.toString())) {
+                binding.txtError.visibility = View.GONE
+                registerUser(binding.inputUsername.text.toString(), binding.inputPass1.text.toString())
             }
         }
 
@@ -45,38 +41,60 @@ class RegisterFragment : BaseFragment() {
     }
 
     private fun registerUser(username: String, pass: String) {
-        if (isUserInputValidated(username) && isPasswordInputValidated(pass)) {
-            authInstance.createUserWithEmailAndPassword(username, pass)
+        if (isUserEmailValidated(username) && isUserPasswordValidated(pass)) {
+            auth.createUserWithEmailAndPassword(username, pass)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        binding.inputUsername.visibility = View.GONE
                         findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
+                    } else {
+                        binding.txtError.text.apply { "Registration is failed!}" }
+                        binding.txtError.visibility = View.VISIBLE
                     }
                 }
 
         }
     }
 
-    private fun isUserInputValidated(username: String): Boolean {
-        return if (inputValidator.isEmailValidated(username)) {
-            binding.txtError.visibility = View.GONE
+    private fun isPasswordsMatch(password1: String, password2: String): Boolean {
+        return if (password1 == password2) {
             true
         } else {
-            binding.txtError.text = "You have entered invalid email."
+            binding.txtError.text = "Password and Confirm Password don't match"
+            binding.txtError.visibility = View.VISIBLE
+            false
+        }
+    }
+
+    private fun isUserEmailValidated(username: String): Boolean {
+        return if (username.isNotBlank()) {
+            if (inputValidator.isEmailValidated(username)) {
+                true
+            } else {
+                binding.txtError.text = "Invalid email entered"
+                binding.txtError.visibility = View.VISIBLE
+                binding.inputUsername.setBackgroundResource(R.color.google)
+                false
+            }
+        } else {
+            binding.txtError.text = "Empty fields are not allowed"
             binding.txtError.visibility = View.VISIBLE
             binding.inputUsername.setBackgroundResource(R.color.google)
             false
         }
     }
 
-    private fun isPasswordInputValidated(password: String): Boolean {
-        return if (inputValidator.isPasswordValidated(password)) {
-            binding.txtError.visibility = View.GONE
-            true
+    private fun isUserPasswordValidated(password: String): Boolean {
+        return if (password.isNotBlank()) {
+            if (inputValidator.isPasswordValidated(password)) {
+                true
+            } else {
+                binding.txtError.text = "Invalid password entered"
+                binding.txtError.visibility = View.VISIBLE
+                false
+            }
         } else {
-            binding.txtError.text = "You have entered invalid password."
+            binding.txtError.text = "Empty fields are not allowed"
             binding.txtError.visibility = View.VISIBLE
-            binding.inputPassword1.setBackgroundResource(R.color.google)
             false
         }
     }

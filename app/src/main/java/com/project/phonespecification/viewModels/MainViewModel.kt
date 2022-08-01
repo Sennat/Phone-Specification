@@ -7,12 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.phonespecification.repository.MainServiceRepository
 import com.project.phonespecification.services.ServiceState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-
+import javax.inject.Inject
 
 const val TAG = "STATE CHECK"
 
-class MainViewModel( private val repository: MainServiceRepository, private val dispatcher: CoroutineDispatcher) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: MainServiceRepository, private val dispatcher: CoroutineDispatcher) : ViewModel() {
     private val _listData = MutableLiveData<ServiceState>()
     val listData: LiveData<ServiceState> get() = _listData
     private val errorMessage = MutableLiveData<String>()
@@ -30,10 +32,20 @@ class MainViewModel( private val repository: MainServiceRepository, private val 
         viewModelScope + exceptionHandler
     }
 
-    fun getWeatherForecast(details: String) {
+    fun getPhoneData() {
         viewModelSafeScope.launch(dispatcher) {
             // collect from our flow
-            repository.getPhoneDetails(details).collect { state ->
+            repository.retrievePhoneData().collect { state ->
+                // postValue updates LiveData asynchronously
+                _listData.postValue(state)
+            }
+        }
+    }
+
+    fun getPhoneDetail(details: String) {
+        viewModelSafeScope.launch(dispatcher) {
+            // collect from flow
+            repository.retrievePhoneDetails(details).collect { state ->
                 // postValue updates LiveData asynchronously
                 _listData.postValue(state)
             }
@@ -42,7 +54,6 @@ class MainViewModel( private val repository: MainServiceRepository, private val 
 
     // setValue is not asynchronous
     fun setLoading() {_listData.value = ServiceState.Loading}
-    fun getSuccessMessage() { println("Success")}
 
     private fun onError(message: String) {
         errorMessage.value = message

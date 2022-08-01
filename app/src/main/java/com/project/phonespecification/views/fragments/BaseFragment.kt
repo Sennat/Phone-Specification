@@ -1,22 +1,20 @@
 package com.project.phonespecification.views.fragments
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
-import com.project.phonespecification.R
 import com.project.phonespecification.dependency.DI
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 open class BaseFragment : Fragment() {
+
+    // initialising Firebase auth object
+    protected val auth by lazy { FirebaseAuth.getInstance() }
+    protected val authListener by lazy { FirebaseAuth.AuthStateListener {  } }
 
     // Initialize ViewModel
     protected val mainViewModelFragment by lazy {
         DI.provideViewModel(requireActivity())
     }
-
-    // Initialize Firebase Auth
-    protected val authInstance by lazy { FirebaseAuth.getInstance() }
 
 }
