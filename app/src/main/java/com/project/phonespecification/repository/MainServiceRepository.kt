@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MainServiceRepository {
     suspend fun retrievePhoneData(): Flow<ServiceState>
-    suspend fun retrievePhoneBrand(details: String): Flow<ServiceState>
-    suspend fun retrievePhoneDetails(details: String): Flow<ServiceState>
+    suspend fun retrievePhoneModel(model: String): Flow<ServiceState>
+    suspend fun retrievePhoneBrandDetail(details: String): Flow<ServiceState>
+    suspend fun getPhoneBrandByBrand(input: String): Flow<ServiceState>
 }

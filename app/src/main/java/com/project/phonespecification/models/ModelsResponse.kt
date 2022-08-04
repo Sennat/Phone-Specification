@@ -1,12 +1,11 @@
 package com.project.phonespecification.models
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ModelResponse(
-    val current_page: Int,
-    val last_page: Int,
-    val phones: List<PhoneInfo>,
-    val title: String
+data class ModelsResponse(
+    val status: Boolean,
+    val data: ModelInfo
 ):Parcelable

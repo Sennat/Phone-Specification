@@ -30,6 +30,8 @@ class LoginFragment : BaseFragment() {
                 binding.inputUsernameText.text.toString(),
                 binding.inputPasswordText.text.toString()
             )
+            binding.inputUsernameText.text?.clear()
+            binding.inputPasswordText.text?.clear()
         }
 
         binding.btnRegister.setOnClickListener {
@@ -96,7 +98,7 @@ class LoginFragment : BaseFragment() {
         }
     }
 
-    override fun onStart() {
+    /*override fun onStart() {
         super.onStart()
         if (auth.currentUser == null) {
             findNavController().navigate(PhoneCardFragmentDirections.actionPhoneCardFragmentToLoginFragment())
@@ -104,6 +106,6 @@ class LoginFragment : BaseFragment() {
             mainViewModelFragment.setLoading()
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToPhoneCardFragment())
         }
-    }
+    }*/
 
 }

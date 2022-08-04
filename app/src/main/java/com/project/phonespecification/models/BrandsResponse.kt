@@ -5,5 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class BrandsResponse(
-    val data: List<Brands>
+    val status: Boolean,
+    val data: List<BrandsInfo>
 ):Parcelable

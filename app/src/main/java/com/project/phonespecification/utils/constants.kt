@@ -1,3 +1,5 @@
 package com.project.phonespecification.utils
 
-const val BASE_URL = "https://api-mobilespecs.azharimm.site"
+object BaseUrl {
+     const val BASE_URL = "https://api-mobilespecs.azharimm.site/"
+ }

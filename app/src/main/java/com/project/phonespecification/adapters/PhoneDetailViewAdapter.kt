@@ -7,7 +7,16 @@ import com.bumptech.glide.Glide
 import com.project.phonespecification.databinding.PhoneCardDetailItemsBinding
 import com.project.phonespecification.models.PhoneDetails
 
-class DetailViewAdapter(private val phoneDataListItem: List<PhoneDetails>) : RecyclerView.Adapter<DetailViewAdapter.DetailViewHolder>() {
+class PhoneDetailViewAdapter(
+    private val phoneDataListItem: MutableList<PhoneDetails> = mutableListOf(),
+    private val openDetails: (PhoneDetails) -> Unit
+) : RecyclerView.Adapter<PhoneDetailViewAdapter.DetailViewHolder>() {
+
+    fun setPhoneList(newList: List<PhoneDetails>) {
+        phoneDataListItem.clear()
+        phoneDataListItem.addAll(newList)
+        notifyDataSetChanged()
+    }
 
     inner class DetailViewHolder(private val binding: PhoneCardDetailItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -23,12 +32,18 @@ class DetailViewAdapter(private val phoneDataListItem: List<PhoneDetails>) : Rec
                 Glide.with(thumbnail)
                     .load(item.thumbnail)
                     .into(thumbnail)
+
+                binding.root.setOnClickListener {
+                    openDetails(item)
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
-        return DetailViewHolder(PhoneCardDetailItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false
+        return DetailViewHolder(
+            PhoneCardDetailItemsBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }

@@ -1,6 +1,6 @@
 package com.project.phonespecification.models
 
 data class PhoneSpec(
-    val data: PhoneDetails,
+    val data: List<PhoneDetails>,
     val status: Boolean
 )

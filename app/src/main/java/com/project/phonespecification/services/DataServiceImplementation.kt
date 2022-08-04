@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class DataService @Inject constructor(private val service: RetrofitService) : MainServiceRepository {
+class DataServiceImplementation @Inject constructor(private val service: RetrofitService) : MainServiceRepository {
     override suspend fun retrievePhoneData(): Flow<ServiceState> =
         flow {
             try {
@@ -22,10 +22,10 @@ class DataService @Inject constructor(private val service: RetrofitService) : Ma
             }
         }
 
-    override suspend fun retrievePhoneBrand(brand: String): Flow<ServiceState> =
+    override suspend fun retrievePhoneModel(model: String): Flow<ServiceState> =
         flow {
             try {
-                val res = service.fetchPhoneBrand(brand)
+                val res = service.fetchPhoneBrand(model)
                 if (res.isSuccessful) {
                     emit(res.body()?.let {
                         ServiceState.Success(it)
@@ -38,7 +38,7 @@ class DataService @Inject constructor(private val service: RetrofitService) : Ma
             }
         }
 
-    override suspend fun retrievePhoneDetails(detail: String): Flow<ServiceState> =
+    override suspend fun retrievePhoneBrandDetail(detail: String): Flow<ServiceState> =
         flow {
             try {
                 val res = service.fetchPhoneDetail(detail)
@@ -53,5 +53,10 @@ class DataService @Inject constructor(private val service: RetrofitService) : Ma
                 emit(ServiceState.Error(e))
             }
         }
+
+    override suspend fun getPhoneBrandByBrand(input: String): Flow<ServiceState> {
+        TODO("Not yet implemented")
+    }
+
 
 }

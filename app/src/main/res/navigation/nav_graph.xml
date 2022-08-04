@@ -40,13 +40,14 @@
         android:name="com.project.phonespecification.views.fragments.PhoneCardFragment"
         android:label="PhoneCardFragment" >
         <action
-            android:id="@+id/action_phoneCardFragment_to_phoneListItemFragment"
-            app:destination="@id/phoneListItemFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@animator/nav_default_exit_anim" />
-        <action
             android:id="@+id/action_phoneCardFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_phoneCardFragment_to_phoneListItemFragment"
+            app:destination="@id/phoneListItemFragment" />
+        <action
+            android:id="@+id/action_phoneCardFragment_to_phoneListItemFragment2"
+            app:destination="@id/phoneListItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/phoneListItemFragment"
@@ -60,8 +61,11 @@
         <action
             android:id="@+id/action_phoneListItemFragment_to_phoneCardFragment"
             app:destination="@id/phoneCardFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@animator/nav_default_exit_anim" />
+            app:enterAnim="@anim/nav_default_enter_anim" />
+
+        <argument
+            android:name="modelType"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/phoneDetailFragment"

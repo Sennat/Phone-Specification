@@ -30,6 +30,9 @@ class RegisterFragment : BaseFragment() {
                 binding.txtError.visibility = View.GONE
                 registerUser(binding.inputUsername.text.toString(), binding.inputPass1.text.toString())
             }
+            binding.inputUsername.text?.clear()
+            binding.inputPass1.text?.clear()
+            binding.inputPass2.text?.clear()
         }
 
         // Return back to login fragment

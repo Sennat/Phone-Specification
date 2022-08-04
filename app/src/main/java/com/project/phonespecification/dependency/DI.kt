@@ -3,21 +3,21 @@ package com.project.phonespecification.dependency
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.project.phonespecification.repository.MainServiceRepository
-import com.project.phonespecification.services.DataService
+import com.project.phonespecification.services.DataServiceImplementation
 import com.project.phonespecification.services.RetrofitService
-import com.project.phonespecification.utils.BASE_URL
+import com.project.phonespecification.utils.BaseUrl.BASE_URL
 import com.project.phonespecification.viewModels.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 object DI {
 
+    @Singleton //Hilt Singleton Injection
     private val service = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -36,7 +36,7 @@ object DI {
             .build()
     }
 
-    private fun provideRepository() = DataService(service)
+    private fun provideRepository() = DataServiceImplementation(service)
     private fun provideDispatcher() = Dispatchers.IO
 
     fun provideViewModel(storeOwner: ViewModelStoreOwner): MainViewModel {

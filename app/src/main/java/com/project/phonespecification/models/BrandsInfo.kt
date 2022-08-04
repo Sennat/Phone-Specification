@@ -4,10 +4,10 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PhoneInfo(
-    val brand: String,
+data class BrandsInfo(
+    val brand_id: Int,
+    val brand_name: String,
+    val brand_slug: String,
     val detail: String,
-    val image: String,
-    val phone_name: String,
-    val slug: String
+    val device_count: Int
 ):Parcelable
