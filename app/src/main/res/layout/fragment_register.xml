@@ -157,6 +157,7 @@
             android:backgroundTint="@color/blue_black_light"
             android:elevation="5dp"
             android:padding="15dp"
+            android:textSize="24sp"
             android:text="@string/sign_up"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

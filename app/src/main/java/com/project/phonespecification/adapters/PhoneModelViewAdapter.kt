@@ -1,22 +1,17 @@
 package com.project.phonespecification.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.project.phonespecification.R
 import com.project.phonespecification.databinding.PhoneListItemBinding
-import com.project.phonespecification.models.ModelInfo
-import com.project.phonespecification.models.ModelsResponse
 import com.project.phonespecification.models.PhonesInfo
-import java.util.*
 
-class PhoneModelInfoViewAdapter(
+class PhoneModelViewAdapter(
     private val phoneInfoList: MutableList<PhonesInfo> = mutableListOf(),
     private val openDetails: (modelType: String) -> Unit
-) : RecyclerView.Adapter<PhoneModelInfoViewAdapter.PhoneInfoViewHolder>() {
+) : RecyclerView.Adapter<PhoneModelViewAdapter.PhoneInfoViewHolder>() {
 
     fun setPhoneInfoList(newList: List<PhonesInfo>) {
         phoneInfoList.clear()
@@ -38,7 +33,7 @@ class PhoneModelInfoViewAdapter(
                     .placeholder(R.drawable.ic_downloading)
                     .into(img)
 
-                binding.root.setOnClickListener { openDetails(item.brand) }
+                binding.root.setOnClickListener { openDetails(item.slug) }
             }
         }
     }

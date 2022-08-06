@@ -1,14 +1,11 @@
 package com.project.phonespecification.views.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.FirebaseAuth
 import com.project.phonespecification.databinding.FragmentLoginBinding
 import com.project.phonespecification.utils.InputValidator
 
@@ -63,7 +60,7 @@ class LoginFragment : BaseFragment() {
         auth.signInWithEmailAndPassword(username, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    mainViewModelFragment.setLoading()
+                    mainViewModelFragment.setBrandLoading()
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToPhoneCardFragment())
                 } else {
                     binding.txtError.text = "Authentication failed!}"

@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.project.phonespecification.adapters.PhoneModelInfoViewAdapter
+import com.project.phonespecification.adapters.PhoneModelViewAdapter
 import com.project.phonespecification.databinding.FragmentPhoneListItemBinding
 import com.project.phonespecification.models.*
 import com.project.phonespecification.services.ServiceState
 
 class PhoneListItemFragment : BaseFragment() {
     private lateinit var binding: FragmentPhoneListItemBinding
-    private val phoneInfoViewAdapter by lazy { PhoneModelInfoViewAdapter(openDetails = ::openDetails) }
+    private val phoneInfoViewAdapter by lazy { PhoneModelViewAdapter(openDetails = ::openDetails) }
     private val args: PhoneListItemFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -28,7 +28,7 @@ class PhoneListItemFragment : BaseFragment() {
     }
 
     private fun liveDataObserver() {
-        mainViewModelFragment.model
+        mainViewModelFragment.modelData
             .observe(viewLifecycleOwner) { uiState ->
                 when (uiState) {
                     is ServiceState.Loading -> {
@@ -36,14 +36,17 @@ class PhoneListItemFragment : BaseFragment() {
                     }
                     is ServiceState.Error -> {
                         binding.pbLoading.visibility = View.GONE
-                        binding.tvLoadingText.text = uiState.error.message
                     }
                     is ServiceState.Success<*> -> {
                         binding.apply {
                             pbLoading.visibility = View.GONE
-                            tvLoadingText.visibility = View.GONE
                             phoneInfoViewAdapter.setPhoneInfoList((uiState.response as ModelsResponse).data.phones)
                             recyclerviewPhoneListItem.adapter = phoneInfoViewAdapter
+                            binding.recyclerviewPhoneListItem.apply {
+                                set3DItem(true)
+                                setAlpha(true)
+                                setInfinite(true)
+                            }
                         }
                     }
                 }
@@ -51,7 +54,7 @@ class PhoneListItemFragment : BaseFragment() {
     }
 
     private fun openDetails(modelType: String) {
-        mainViewModelFragment.setModelLoading()
-        findNavController().navigate(PhoneCardFragmentDirections.actionPhoneCardFragmentToPhoneListItemFragment(modelType))
+        mainViewModelFragment.setModelDetailLoading()
+        findNavController().navigate(PhoneListItemFragmentDirections.actionPhoneListItemFragmentToPhoneDetailFragment(modelType))
     }
 }

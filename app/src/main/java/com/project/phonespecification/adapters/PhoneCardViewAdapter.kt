@@ -23,7 +23,6 @@ class PhoneCardViewAdapter(
             binding.txtBrand.text = item.brand_name.uppercase()
             val re = Regex("[^A-Za-z0-9 ]")
             binding.txtModel.text = re.replace(item.brand_slug.uppercase(), " ")
-            //binding.txtModel.text = item.brand_slug.trim("_")
 
             //getSlugName(item.slug)
             binding.root.setOnClickListener {

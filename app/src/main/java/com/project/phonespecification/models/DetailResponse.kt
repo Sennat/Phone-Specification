@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ModelsResponse(
-    val status: Boolean,
-    val data: ModelInfo
-):Parcelable
+data class DetailResponse(
+    val data: PhoneDetail,
+    val status: Boolean
+) : Parcelable

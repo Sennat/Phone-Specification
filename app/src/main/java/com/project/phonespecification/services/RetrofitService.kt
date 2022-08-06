@@ -16,10 +16,10 @@ interface RetrofitService {
         @Path("brand") brand_slug: String
     ): Response<ModelsResponse>
 
-    @GET("v2/brands/{title}")
+    @GET("v2/{model}") //slug
     suspend fun fetchPhoneDetail(
-        @Path("title") title: String
-    ): Response<PhoneSpec>
+        @Path("model") slug: String
+    ): Response<DetailResponse>
 
     @GET("v2/brands/{search}")
     suspend fun getPhoneByBrand(

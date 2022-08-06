@@ -1,40 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent"
-    app:strokeColor="@color/black"
-    android:layout_margin="15dp"
-    app:cardCornerRadius="30dp"
-    app:cardElevation="20dp"
-    app:strokeWidth="2dp"
-    android:padding="8dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="20dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:checkable="true"
+    app:cardElevation="10dp"
+    android:padding="15dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_phone_list_Item"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wrap"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:background="@color/translucent_white"
+        android:padding="10dp" >
 
-    <ProgressBar
-        android:id="@+id/pb_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:outlineSpotShadowColor="@color/google"
-        app:layout_constraintTop_toTopOf="@id/tv_loading_text"
-        app:layout_constraintStart_toEndOf="@id/tv_loading_text"
-        app:layout_constraintBottom_toBottomOf="@id/tv_loading_text"/>
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="190dp"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:elevation="45dp"
+            app:cardCornerRadius="20dp"
+            tools:srcCompat="@tools:sample/avatars"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    <TextView
-        android:id="@+id/tv_loading_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loading"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/txt_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_brand"
+            android:textAlignment="textStart"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/fb"
+            app:layout_constraintStart_toEndOf="@id/thumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/thumbnail"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txt_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/phone_model"
+            android:textSize="20sp"
+            android:textColor="@color/semi_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/txt_brand"/>
+
+        <TextView
+            android:id="@+id/txt_dimension"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_dimension"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/fb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail"/>
+
+        <TextView
+            android:id="@+id/txt_os"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_os"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:textColor="@color/fb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_dimension"
+            app:layout_constraintBottom_toTopOf="@id/txt_storage"/>
+
+        <TextView
+            android:id="@+id/txt_storage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_storage"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:textColor="@color/fb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_os"/>
+
+        <TextView
+            android:id="@+id/txt_release_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/released_date"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:textColor="@color/fb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_storage"/>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/txt_loading"
+            app:layout_constraintStart_toEndOf="@id/txt_loading"
+            app:layout_constraintBottom_toBottomOf="@id/txt_loading"/>
+
+        <TextView
+            android:id="@+id/txt_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_release_date"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textFontWeight="800"
+            android:text="Add To Cart"
+            android:padding="25dp"
+            android:textSize="25sp"
+            app:icon="@drawable/ic_shopping_cart"
+            app:iconSize="45dp"
+            app:elevation="24dp"
+            android:textColor="@color/fb"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -56,12 +56,12 @@
         <action
             android:id="@+id/action_phoneListItemFragment_to_phoneDetailFragment"
             app:destination="@id/phoneDetailFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@animator/nav_default_exit_anim" />
+            app:enterAnim="@animator/nav_default_pop_enter_anim"
+            app:exitAnim="@animator/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_phoneListItemFragment_to_phoneCardFragment"
             app:destination="@id/phoneCardFragment"
-            app:enterAnim="@anim/nav_default_enter_anim" />
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
 
         <argument
             android:name="modelType"
@@ -74,8 +74,9 @@
         tools:layout="@layout/fragment_phone_detail" >
         <action
             android:id="@+id/action_phoneDetailFragment_to_phoneListItemFragment"
-            app:destination="@id/phoneListItemFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@animator/nav_default_exit_anim" />
+            app:destination="@id/phoneListItemFragment" />
+        <argument
+            android:name="modelInfo"
+            app:argType="string" />
     </fragment>
 </navigation>

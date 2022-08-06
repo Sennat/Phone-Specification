@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PhoneDetails(
+data class PhoneDetail(
     val brand: String,
     val dimension: String,
     val os: String,

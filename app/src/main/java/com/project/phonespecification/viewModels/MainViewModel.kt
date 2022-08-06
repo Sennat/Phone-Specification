@@ -21,12 +21,15 @@ class MainViewModel @Inject constructor(
     private val _listData = MutableLiveData<ServiceState>()
     val listData: LiveData<ServiceState> get() = _listData
 
-    private val _model = MutableLiveData<ServiceState>()
-    val model: LiveData<ServiceState> get() = _model
+    private val _modelData = MutableLiveData<ServiceState>()
+    val modelData: LiveData<ServiceState> get() = _modelData
+
+    private val _modelInfo = MutableLiveData<ServiceState>()
+    val modelInfo: LiveData<ServiceState> get() = _modelInfo
 
     private val errorMessage = MutableLiveData<String>()
     private val loading = MutableLiveData<Boolean>()
-    var job: Job? = null
+    private var job: Job? = null
 
     private val exceptionHandler by lazy {
         CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -58,17 +61,32 @@ class MainViewModel @Inject constructor(
             // collect from flow
             repository.retrievePhoneModel(model).collect { state ->
                 // postValue updates LiveData asynchronously
-                _model.postValue(state)
+                _modelData.postValue(state)
+            }
+        }
+    }
+
+    fun getPhoneModelDetail(detail: String) {
+        viewModelSafeScope.launch(dispatcher) {
+            // collect from flow
+            repository.retrievePhoneBrandDetail(detail).collect { state ->
+                // postValue updates LiveData asynchronously
+                _modelInfo.postValue(state)
             }
         }
     }
 
     // setValue is not asynchronous
-    fun setLoading() {
+    fun setBrandLoading() {
         _listData.value = ServiceState.Loading
     }
+
     fun setModelLoading() {
-        _model.value = ServiceState.Loading
+        _modelData.value = ServiceState.Loading
+    }
+
+    fun setModelDetailLoading() {
+        _modelInfo.value = ServiceState.Loading
     }
 
     private fun onError(message: String) {
@@ -80,4 +98,6 @@ class MainViewModel @Inject constructor(
         super.onCleared()
         job?.cancel()
     }
+
+    fun getSuccessMessage() { println("Success")}
 }

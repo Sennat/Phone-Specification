@@ -11,7 +11,7 @@
     <string name="phone_brand">Phone Brand</string>
     <string name="phone_model">Phone Model</string>
     <string name="phone_desc">Phone Description</string>
-    <string name="content_description">"Cards also support a swipe-to-dismiss behavior through the use of "</string>
+    <string name="content_description">" "</string>
     <string name="password_2">Verify Password</string>
     <string name="have_account">Already have account?</string>
     <string name="pass_criteria">Your password should have a minimum of 8 characters and contain at least one number, one uppercase, and one lowercase letter. You can use special characters.</string>

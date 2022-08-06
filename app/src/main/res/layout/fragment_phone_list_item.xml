@@ -7,34 +7,57 @@
     android:background="@color/transparent"
     app:strokeColor="@color/black"
     android:layout_margin="15dp"
-    app:cardCornerRadius="30dp"
-    app:cardElevation="20dp"
-    app:strokeWidth="2dp"
+    android:orientation="vertical"
     android:padding="8dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_phone_list_Item"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    <ImageView
+        android:id="@+id/top_img"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <ProgressBar
-        android:id="@+id/pb_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:outlineSpotShadowColor="@color/google"
-        app:layout_constraintTop_toTopOf="@id/tv_loading_text"
-        app:layout_constraintStart_toEndOf="@id/tv_loading_text"
-        app:layout_constraintBottom_toBottomOf="@id/tv_loading_text"/>
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="35dp"
+        android:elevation="45dp"
+        android:src="@drawable/phone2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_loading_text"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_top_desc"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/loading"
+        android:shadowRadius="10"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="25dp"
+        android:text="Make Your Choice"
+        android:textAlignment="center"
+        android:textColor="@color/fb"
+        android:textSize="24sp"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/top_img" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_top_desc">
+
+        <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+            android:id="@+id/recyclerview_phone_list_Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
