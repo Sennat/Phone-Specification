@@ -1,5 +1,6 @@
 package com.project.phonespecification.views.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +8,15 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.project.phonespecification.databinding.FragmentLoginBinding
+import com.project.phonespecification.utils.Constants.USER_ID
 import com.project.phonespecification.utils.InputValidator
 
 class LoginFragment : BaseFragment() {
 
     // Initialize viewBinding
     private lateinit var binding: FragmentLoginBinding
+    private val sharedPreferences by lazy { requireContext().getSharedPreferences(USER_ID, Context.MODE_PRIVATE)}
+    private val USER_EMAIL = "user_email"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,6 +24,7 @@ class LoginFragment : BaseFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(layoutInflater)
+        binding.inputUsernameText.setText(rememberUsername())
 
         // Validate user authentication
         binding.btnLogin.setOnClickListener {
@@ -27,8 +32,6 @@ class LoginFragment : BaseFragment() {
                 binding.inputUsernameText.text.toString(),
                 binding.inputPasswordText.text.toString()
             )
-            binding.inputUsernameText.text?.clear()
-            binding.inputPasswordText.text?.clear()
         }
 
         binding.btnRegister.setOnClickListener {
@@ -46,6 +49,15 @@ class LoginFragment : BaseFragment() {
         if (isInputValidated(binding.inputUsername, binding.inputPassword)) {
             if (isUserEmailAndPasswordValidated(user, pass)) {
                 authenticateUser(user, pass)
+                if (binding.checkedBox.isChecked) {
+                    var editor = sharedPreferences.edit()
+                    editor.putString(USER_EMAIL, binding.inputUsernameText.text.toString())
+                    editor.commit()
+                }
+
+                binding.checkedBox.isChecked = false
+                binding.inputUsernameText.text?.clear()
+                binding.inputPasswordText.text?.clear()
             }
         } else {
             binding.txtError.text.apply { "Authentication failed!" }
@@ -95,12 +107,22 @@ class LoginFragment : BaseFragment() {
         }
     }
 
+    private fun rememberUsername(): String? {
+        return if (sharedPreferences.getString(USER_EMAIL, "") != "") {
+            binding.checkedBox.isChecked = true
+            sharedPreferences.getString(USER_EMAIL, "")
+        } else {
+            binding.checkedBox.isChecked = false
+            null
+        }
+    }
+
     /*override fun onStart() {
         super.onStart()
-        if (auth.currentUser == null) {
+        if (auth.currentUser != null) {
+            mainViewModelFragment.setBrandLoading()
             findNavController().navigate(PhoneCardFragmentDirections.actionPhoneCardFragmentToLoginFragment())
         } else {
-            mainViewModelFragment.setLoading()
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToPhoneCardFragment())
         }
     }*/

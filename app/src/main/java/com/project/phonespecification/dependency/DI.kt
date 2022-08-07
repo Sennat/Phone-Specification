@@ -3,9 +3,9 @@ package com.project.phonespecification.dependency
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.project.phonespecification.services.DataServiceImplementation
-import com.project.phonespecification.services.RetrofitService
-import com.project.phonespecification.utils.BaseUrl.BASE_URL
+import com.project.phonespecification.services.RetrofitServiceImplementation
+import com.project.phonespecification.services.network.RetrofitService
+import com.project.phonespecification.utils.Constants.BASE_URL
 import com.project.phonespecification.viewModels.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -36,7 +36,7 @@ object DI {
             .build()
     }
 
-    private fun provideRepository() = DataServiceImplementation(service)
+    private fun provideRepository() = RetrofitServiceImplementation(service)
     private fun provideDispatcher() = Dispatchers.IO
 
     fun provideViewModel(storeOwner: ViewModelStoreOwner): MainViewModel {

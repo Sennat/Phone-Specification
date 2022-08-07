@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.phonespecification.repository.MainServiceRepository
+import com.project.phonespecification.repository.RetrofitServiceRepository
 import com.project.phonespecification.services.ServiceState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -15,7 +15,7 @@ const val TAG = "STATE CHECK"
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: MainServiceRepository,
+    private val repository: RetrofitServiceRepository,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _listData = MutableLiveData<ServiceState>()

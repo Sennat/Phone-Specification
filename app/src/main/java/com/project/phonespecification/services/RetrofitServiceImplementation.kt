@@ -1,11 +1,12 @@
 package com.project.phonespecification.services
 
-import com.project.phonespecification.repository.MainServiceRepository
+import com.project.phonespecification.repository.RetrofitServiceRepository
+import com.project.phonespecification.services.network.RetrofitService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class DataServiceImplementation @Inject constructor(private val service: RetrofitService) : MainServiceRepository {
+class RetrofitServiceImplementation @Inject constructor(private val service: RetrofitService) : RetrofitServiceRepository {
     override suspend fun retrievePhoneData(): Flow<ServiceState> =
         flow {
             try {

@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.project.phonespecification.adapters.PhoneCardViewAdapter
 import com.project.phonespecification.databinding.FragmentPhoneCardBinding
-import com.project.phonespecification.models.BrandsInfo
 import com.project.phonespecification.models.BrandsResponse
 import com.project.phonespecification.services.ServiceState
 

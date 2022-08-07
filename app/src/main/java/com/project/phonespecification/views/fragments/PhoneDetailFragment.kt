@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.project.phonespecification.R
 import com.project.phonespecification.databinding.FragmentPhoneDetailBinding
 import com.project.phonespecification.models.DetailResponse
-import com.project.phonespecification.models.PhoneDetail
 import com.project.phonespecification.services.ServiceState
 
 class PhoneDetailFragment : BaseFragment() {
@@ -48,7 +47,7 @@ class PhoneDetailFragment : BaseFragment() {
                             txtLoading.visibility = View.GONE
                             txtBrand.text = res.data.brand.uppercase()
                             txtModel.text = res.data.phone_name
-                            txtDimension.text = "Dimension: ${res.data.dimension.capitalize().apply { Color.BLACK }}"
+                            txtDimension.text = "Dimension: ${res.data.dimension.uppercase().apply { Color.BLACK }}"
                             txtOs.text = "OS: ${res.data.os.uppercase().apply { Color.BLACK }}"
                             txtStorage.text = "Storage: ${res.data.storage.uppercase().apply { Color.BLACK }}"
                             txtReleaseDate.text = res.data.release_date.uppercase().apply { Color.BLACK }

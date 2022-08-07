@@ -2,8 +2,6 @@ package com.project.phonespecification.authentication
 
 import com.google.firebase.auth.FirebaseAuth
 import com.project.phonespecification.utils.InputValidator
-import dagger.Provides
-import javax.inject.Singleton
 
 class Authentication constructor(
     private val username: String,

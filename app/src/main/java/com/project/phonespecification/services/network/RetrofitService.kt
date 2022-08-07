@@ -1,4 +1,4 @@
-package com.project.phonespecification.services
+package com.project.phonespecification.services.network
 
 import com.project.phonespecification.models.*
 import retrofit2.Response

@@ -25,4 +25,6 @@
     <string name="username_or_password_not_correct">The username or password is incorrect</string>
     <string name="input_incorrect">Required input is incorrect!</string>
     <string name="action_search">Search</string>
+    <string name="remember">Remember Username</string>
+    <string name="user_ID">UserID</string>
 </resources>
