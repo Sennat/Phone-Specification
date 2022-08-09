@@ -1,0 +1,5 @@
+# Phone-Specification![Login](https://user-images.githubusercontent.com/28781001/183672085-38a197f2-11c9-4660-9b3a-b92f79f25424.png)
+![Register](https://user-images.githubusercontent.com/28781001/183672314-d2601d43-6965-4d5f-9122-4dcd770bfd8f.png)
+![Phone Brands](https://user-images.githubusercontent.com/28781001/183672541-01c6fbcb-7dd8-4969-8ebb-9b2cf5b21e9b.png)
+![Phone Model](https://user-images.githubusercontent.com/28781001/183672712-fb86f054-4895-4cb0-8112-b52aeb1d828b.png)
+![Phone Brands](https://user-images.githubusercontent.com/28781001/183672934-cd02b00b-6f17-4b03-8230-7c0e81c70176.png)
